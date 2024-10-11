@@ -17,14 +17,16 @@ const fetch_coordinates = async (municipality) => {
     }
 }
 
-const coordinates = []
-for ( const municipality of municipalities ) {
-    const data = (await fetch_coordinates(municipality))[0]
-    const coord = {
-        name: data.name,
-        lat: data.lat,
-        lon: data.lon
+async function get_coordinates() {
+    const coordinates = []
+    for ( const municipality of municipalities ) {
+        const data = (await fetch_coordinates(municipality))[0]
+        const coord = {
+            name: data.name,
+            lat: data.lat,
+            lon: data.lon
+        }
+        coordinates.push(coord)
     }
-    coordinates.push(coord)
+    console.log(coordinates)
 }
-console.log(coordinates)
