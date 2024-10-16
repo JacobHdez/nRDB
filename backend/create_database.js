@@ -61,7 +61,8 @@ async function get_coordinates()
                 lat: m_data.latitude,
                 lon: m_data.longitude
             }
-            await collection.insertOne( m_coord )
+            const result = await collection.insertOne( m_coord )
+            console.log(`A document was inserted with the _id: ${result.insertedId}`)
         }
     }
     finally {
