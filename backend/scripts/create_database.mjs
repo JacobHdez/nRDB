@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb'
 
-import { municipalities } from './data.js'
+import { municipalities } from './data.mjs'
 
 
 const base_url_coord = 'https://geocoding-api.open-meteo.com/v1/search'
