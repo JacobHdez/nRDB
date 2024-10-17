@@ -5,7 +5,7 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "create_db": "node --env-file .env.development.local create_database.js"
+    "create_db": "node create_database.js"
   },
   "author": "Jacobo Hernández Varela",
   "license": "MIT",
