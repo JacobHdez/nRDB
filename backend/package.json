@@ -5,7 +5,7 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "create_db": "node --env-file .env.development.local create_database.js"
   },
   "author": "Jacobo Hernández Varela",
   "license": "MIT",

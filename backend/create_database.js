@@ -66,7 +66,7 @@ async function get_coordinates()
         }
     }
     finally {
-        mongo_client.close()
+        await mongo_client.close()
     }
 }
 
@@ -117,6 +117,14 @@ async function get_weather()
         }
     }
     finally {
-        mongo_client.close()
+        await mongo_client.close()
     }
 }
+
+
+console.log('Creating database ...')
+
+await get_coordinates()
+await get_weather()
+
+console.log('Database created ...')
