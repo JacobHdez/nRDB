@@ -1,8 +1,8 @@
 import http from 'http'
 import { URL } from 'url'
 
-const hostname = '127.0.0.1'
-const port = 3000
+const hostname = process.env.HOSTNAME || '127.0.0.1'
+const port = process.env.PORT || 3000
 
 const server = http.createServer( async ( request, response ) => {
     const request_url = new URL( request.url, `http://${request.headers.host}` )

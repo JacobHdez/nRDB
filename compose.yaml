@@ -2,6 +2,18 @@ name: nRDB
 
 services:
 
+    api:
+        build: ./backend
+        depends_on:
+            - db
+        ports:
+            - 3000:3000
+        environment:
+            MONGODB_URI: ${MONGODB_URI}
+        volumes:
+            - ./backend:/usr/src/app
+        command: node main.js
+
     db:
         image: mongo:latest
         volumes:
