@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb'
 
-import { municipalities } from './data.mjs'
+import { municipalities } from './data.js'
 
 
 const base_url_coord = 'https://geocoding-api.open-meteo.com/v1/search'
@@ -124,7 +124,8 @@ async function get_weather()
 
 console.log('Creating database ...')
 
-await get_coordinates()
-await get_weather()
+// await get_coordinates()
+// await get_weather()
+console.log(process.env.MONGODB_URI)
 
 console.log('Database created ...')
