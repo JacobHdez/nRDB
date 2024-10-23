@@ -124,8 +124,7 @@ async function get_weather()
 
 console.log('Creating database ...')
 
-// await get_coordinates()
-// await get_weather()
-console.log(process.env.MONGODB_URI)
+await get_coordinates()
+await get_weather()
 
 console.log('Database created ...')
