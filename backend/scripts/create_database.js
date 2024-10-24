@@ -19,7 +19,7 @@ async function connect_to_mongodb( uri )
         return mongo_client
     }
     catch ( error ) {
-        console.log('Connection to MongoDB failed:', error)
+        console.error('Connection to MongoDB failed:', error)
     }
 }
 
