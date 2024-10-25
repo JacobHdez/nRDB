@@ -10,7 +10,6 @@
   "author": "Jacobo Hernández Varela",
   "license": "MIT",
   "dependencies": {
-    "mongodb": "^6.9.0",
-    "numeric": "^1.2.6"
+    "mongodb": "^6.9.0"
   }
 }
