@@ -12,7 +12,7 @@ services:
             MONGODB_URI: ${MONGODB_URI}
         volumes:
             - ./backend:/usr/src/app
-        command: node main.js
+        command: npm run start
 
     db:
         image: mongo:latest
