@@ -1,26 +1,9 @@
 import http from 'http'
 import { URL } from 'url'
-import { MongoClient } from 'mongodb'
+import { connect_to_mongo } from './database.js'
 
 const hostname = process.env.HOSTNAME || '127.0.0.1'
 const port = process.env.PORT || 3000
-
-async function connect_to_mongo( uri )
-{
-    let mongo_client
-    try {
-        mongo_client = new MongoClient( uri )
-        console.log('Connecting to MongoDB ...')
-
-        await mongo_client.connect()
-        console.log('Connected to MongoDB ...')
-
-        return mongo_client
-    }
-    catch ( error ) {
-        console.error( 'Connection to MongoDB failed:', error )
-    }
-}
 
 const server = http.createServer( async ( request, response ) => {
     const request_url = new URL( request.url, `http://${request.headers.host}` )
