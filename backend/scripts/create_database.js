@@ -97,11 +97,22 @@ async function get_weather()
             )
 
             console.log(`${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`)
+
+            await sleep(2000)
         }
     }
     finally {
         await mongo_client.close()
     }
+}
+
+function sleep( ms )
+{
+    return new Promise( ( res, rej ) => {
+        setTimeout( () => {
+            res()
+        }, ms )
+    } )
 }
 
 
