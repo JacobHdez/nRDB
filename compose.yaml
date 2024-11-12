@@ -6,13 +6,17 @@ services:
         build: ./backend
         depends_on:
             - db
+            - cache
         ports:
             - 3000:3000
         environment:
             MONGODB_URI: ${MONGODB_URI}
+            REDIS_ROOT_PASSWORD: ${REDIS_ROOT_PASSWORD}
+            REDIS_HOST: ${REDIS_HOST}
+            REDIS_PORT: ${REDIS_PORT}
         volumes:
             - ./backend:/usr/src/app
-        command: node main.js
+        command: npm run start
 
     db:
         image: mongo:latest
@@ -23,6 +27,15 @@ services:
         environment:
             MONGO_INITDB_ROOT_USERNAME: ${MONGODB_ROOT_USERNAME}
             MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_ROOT_PASSWORD}
+    
+    cache:
+        image: redis:latest
+        volumes:
+            - cache:/data
+        ports:
+            - 6379:6379
+        command: redis-server --loglevel warning --requirepass ${REDIS_ROOT_PASSWORD}
 
 volumes:
     mongodb_data:
+    cache:

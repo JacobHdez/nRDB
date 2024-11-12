@@ -1,27 +1,10 @@
-import { MongoClient } from 'mongodb'
+import { connect_to_mongo } from '../database.js'
 
 import { municipalities } from './data.js'
 
 
 const base_url_coord = 'https://geocoding-api.open-meteo.com/v1/search'
 const base_url_weather = 'https://archive-api.open-meteo.com/v1/archive'
-
-async function connect_to_mongodb( uri )
-{
-    let mongo_client
-    try {
-        mongo_client = new MongoClient( uri )
-        console.log(`Connecting to MongoDB ...`)
-
-        await mongo_client.connect()
-        console.log('Connected to MongoDB ...')
-
-        return mongo_client
-    }
-    catch ( error ) {
-        console.error('Connection to MongoDB failed:', error)
-    }
-}
 
 async function fetch_coordinates( municipality )
 {
@@ -50,7 +33,7 @@ async function get_coordinates()
     const db_uri = process.env.MONGODB_URI
     let mongo_client
     try {
-        mongo_client = await connect_to_mongodb( db_uri )
+        mongo_client = await connect_to_mongo( db_uri )
         const db = mongo_client.db( 'weather' )
         const collection = db.collection( 'guanajuato' )
 
@@ -94,7 +77,7 @@ async function get_weather()
     const db_uri = process.env.MONGODB_URI
     let mongo_client
     try {
-        mongo_client = await connect_to_mongodb( db_uri )
+        mongo_client = await connect_to_mongo( db_uri )
         const db = mongo_client.db( 'weather' )
         const collection = db.collection( 'guanajuato' )
 
@@ -114,11 +97,22 @@ async function get_weather()
             )
 
             console.log(`${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`)
+
+            await sleep(2000)
         }
     }
     finally {
         await mongo_client.close()
     }
+}
+
+function sleep( ms )
+{
+    return new Promise( ( res, rej ) => {
+        setTimeout( () => {
+            res()
+        }, ms )
+    } )
 }
 
 
